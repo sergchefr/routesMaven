@@ -1,8 +1,10 @@
 
 package client.consoleIO;
 import client.clientmanager.ClientManager;
+import client.clientmanager.ScriptReader;
 import client.coms.AbstractCommand;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -71,14 +73,13 @@ public class ConsoleIO {
                     }
                     break;
                 case("execute_script"):
-                    System.out.println("in development");
-                    //TODO написать анализатор скриптов
-//                    if(splitted.length==2){
-//                        System.out.println(commExec.execute("execute_script "+splitted[1].strip()));
-//                    }else if(splitted.length==1){
-//                        System.out.print("type filename: ");
-//                        System.out.println(commExec.execute("execute_script "+console.nextLine().strip()));
-//                    }
+                    ScriptReader scriptReader = new ScriptReader(clientManager);
+                    try{
+                        scriptReader.execute(param[1]);
+                    }catch (IOException e){
+                        System.out.println("error while opening the file");
+                    }
+
                     break;
                 case("add_if_max"):
                     param = rangeConstructor().split(" ");
