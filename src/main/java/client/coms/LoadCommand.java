@@ -13,7 +13,7 @@ public class LoadCommand extends AbstractCommand{
 
     @Override
     public String execute() {
-        getTarget().addCommandToHistiry("load");
+        getTarget().addCommandToHistory("load");
         return getTarget().load(filename);
     }
 

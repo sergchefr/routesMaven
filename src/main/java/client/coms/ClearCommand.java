@@ -9,7 +9,7 @@ public class ClearCommand extends AbstractCommand {
 
     @Override
     public String execute() {
-        getTarget().addCommandToHistiry("clear");
+        getTarget().addCommandToHistory("clear");
         return getTarget().clear();
     }
 

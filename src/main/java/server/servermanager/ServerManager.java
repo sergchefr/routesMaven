@@ -142,7 +142,7 @@ public class ServerManager implements Commands{
         return hst.showHistory();
     }
 
-    public void addCommandToHistiry(String com){
+    public void addCommandToHistory(String com){
         hst.add(com);
     }
 }

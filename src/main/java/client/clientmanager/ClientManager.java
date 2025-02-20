@@ -4,6 +4,7 @@ import client.coms.AbstractCommand;
 import client.coms.Response;
 import server.servermanager.ServerManager;
 
+import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayDeque;
@@ -20,13 +21,15 @@ public class ClientManager {
         //client.coms.put("add",new AddCommand(new TreeSetHandler(), new String()));
     }
 
-    public AbstractCommand getCommand(String comName, String[] param){
+    public AbstractCommand getCommand(String comName, String[] param)throws IOException{
         Constructor<?> constructor = coms.get(comName).getConstructors()[0];
         try {
             return (AbstractCommand) constructor.newInstance(serverManager, param);
-        } catch (/*IOException |*/ InstantiationException | IllegalAccessException | InvocationTargetException e) {
+        } catch (/*IOException |*/ InstantiationException | IllegalAccessException e) {
                 throw new RuntimeException(e);
-            }
+        }catch (InvocationTargetException e){
+            throw new IOException("impossible to execute that comment. Try to chech parametres");
+        }
     }
 
 

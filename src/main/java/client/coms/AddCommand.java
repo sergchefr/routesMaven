@@ -12,9 +12,10 @@ private final Route route;
 
     public AddCommand(ServerManager target, String[] param) throws IOException {
         super(target, param);
+        //throw new IOException();
         try {
             this.route = routeParse(param);
-        } catch (IOException e) {
+        } catch (IOException | RuntimeException e ) {
             throw new IOException(e);
         }
     }
@@ -22,7 +23,7 @@ private final Route route;
     //public AddCommand(String a) {}
 
     public String execute(){
-        getTarget().addCommandToHistiry("add");
+        getTarget().addCommandToHistory("add");
         return getTarget().add(route);
     }
 

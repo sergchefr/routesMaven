@@ -12,7 +12,7 @@ public class ExecuteScriptCommand extends AbstractCommand{
 
     @Override
     public String execute() {
-        getTarget().addCommandToHistiry("execute_script");
+        getTarget().addCommandToHistory("execute_script");
         return getTarget().executeScript(filename);
     }
 

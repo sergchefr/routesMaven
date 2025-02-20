@@ -19,7 +19,7 @@ public class AddIfMinCommand extends AbstractCommand{
     }
 
     public String execute(){
-        getTarget().addCommandToHistiry("add_if_min");
+        getTarget().addCommandToHistory("add_if_min");
         return getTarget().addIfMin(route);
     }
 

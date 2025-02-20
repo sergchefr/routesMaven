@@ -9,7 +9,7 @@ public class PrintAscCommand extends AbstractCommand{
 
     @Override
     public String execute() {
-        getTarget().addCommandToHistiry("print_ascending");
+        getTarget().addCommandToHistory("print_ascending");
         return getTarget().printAsc();
     }
 

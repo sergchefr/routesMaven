@@ -14,7 +14,7 @@ public class RemoveByIdCommand extends AbstractCommand{
 
     @Override
     public String execute() {
-        getTarget().addCommandToHistiry("remove_by_id");
+        getTarget().addCommandToHistory("remove_by_id");
         return getTarget().removeById(id);
     }
 

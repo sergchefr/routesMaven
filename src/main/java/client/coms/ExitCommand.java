@@ -11,7 +11,7 @@ public class ExitCommand extends AbstractCommand
 
     @Override
     public String execute() {
-        getTarget().addCommandToHistiry("exit");
+        getTarget().addCommandToHistory("exit");
         return getTarget().exit();
     }
 

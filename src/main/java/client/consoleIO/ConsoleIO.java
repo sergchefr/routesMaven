@@ -39,37 +39,63 @@ public class ConsoleIO {
 
             switch (com){
                 case("help"):
-                    q= clientManager.getCommand("help", param);
-                    clientManager.execCommand(q);
+                    try {
+                        q = clientManager.getCommand("help", param);
+                        clientManager.execCommand(q);
+                    }catch (IOException e){
+                        System.out.println(e.getMessage());
+                    }
                     break;
                 case "info","show","exit","clear","history","average_of_distance","print_ascending","print_field_ascending_distance":
-                    q = clientManager.getCommand(com, null);
-                    clientManager.execCommand(q);
+                    try {
+                        q = clientManager.getCommand(com, null);
+                        clientManager.execCommand(q);
+                    } catch (IOException e) {
+                        System.out.println(e.getMessage());
+                    }
+
                     break;
                 case("add"):
                     //String c = rangeConstructor();
                     param = rangeConstructor().split(" ");
-                    q = clientManager.getCommand(com, param);
-                    clientManager.execCommand(q);
+                    try {
+                        q = clientManager.getCommand(com, param);
+                        clientManager.execCommand(q);
+                    } catch (IOException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
                 case("update"):
                     System.out.print("type id: ");
                     String a = console.nextLine().strip()+" "+rangeConstructor();
                     //a=a+rangeConstructor();
                     param = a.split(" ");
-                    q = clientManager.getCommand(com, param);
-                    clientManager.execCommand(q);
+                    try {
+                        q = clientManager.getCommand(com, param);
+                        clientManager.execCommand(q);
+                    } catch (IOException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
+                    //TODO check
                 case("remove_by_id"):
                     if(param==null){
                         System.out.print("type id: ");
                         param = new String[1];
                         param[0]=console.nextLine().strip();
-                        q = clientManager.getCommand(com, param);
-                        clientManager.execCommand(q);
+                        try {
+                            q = clientManager.getCommand(com, param);
+                            clientManager.execCommand(q);
+                        } catch (IOException e) {
+                            System.out.println(e.getMessage());
+                        }
                     }else if(param.length ==1){
-                        q = clientManager.getCommand(com, param);
-                        clientManager.execCommand(q);
+                        try {
+                            q = clientManager.getCommand(com, param);
+                            clientManager.execCommand(q);
+                        } catch (IOException e) {
+                            System.out.println(e.getMessage());
+                        }
                     }
                     break;
                 case("execute_script"):
@@ -83,17 +109,29 @@ public class ConsoleIO {
                     break;
                 case("add_if_max"):
                     param = rangeConstructor().split(" ");
-                    q = clientManager.getCommand(com, param);
-                    clientManager.execCommand(q);
+                    try {
+                        q = clientManager.getCommand(com, param);
+                        clientManager.execCommand(q);
+                    } catch (IOException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
                 case("add_if_min"):
                     param = rangeConstructor().split(" ");
-                    q = clientManager.getCommand(com, param);
-                    clientManager.execCommand(q);
+                    try {
+                        q = clientManager.getCommand(com, param);
+                        clientManager.execCommand(q);
+                    } catch (IOException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
                 case"load","save" :
-                    q = clientManager.getCommand(com, param);
-                    clientManager.execCommand(q);
+                    try {
+                        q = clientManager.getCommand(com, param);
+                        clientManager.execCommand(q);
+                    } catch (IOException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
                 default:
                     System.out.println("unidentified command");

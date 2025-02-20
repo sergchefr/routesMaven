@@ -10,7 +10,7 @@ public class AVGdistanceCommand extends AbstractCommand{
 
     @Override
     public String execute() {
-        getTarget().addCommandToHistiry("average_of_distance");
+        getTarget().addCommandToHistory("average_of_distance");
         return getTarget().avgdistance();
     }
 

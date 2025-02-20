@@ -12,7 +12,7 @@ public class SaveCommand extends AbstractCommand{
 
     @Override
     public String execute() {
-        getTarget().addCommandToHistiry("save");
+        getTarget().addCommandToHistory("save");
         return getTarget().save(filename);
     }
 

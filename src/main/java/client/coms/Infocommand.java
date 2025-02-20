@@ -10,7 +10,7 @@ public class Infocommand extends AbstractCommand{
 
     @Override
     public String execute() {
-        getTarget().addCommandToHistiry("info");
+        getTarget().addCommandToHistory("info");
         return getTarget().info();
     }
 

@@ -10,7 +10,7 @@ public class HistoryCommand extends AbstractCommand{
 
     @Override
     public String execute() {
-        getTarget().addCommandToHistiry("history");
+        getTarget().addCommandToHistory("history");
         return getTarget().showHistory();
     }
 

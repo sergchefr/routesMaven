@@ -2,6 +2,8 @@ package client.coms;
 
 import server.servermanager.ServerManager;
 
+import java.io.IOException;
+
 public  abstract class AbstractCommand{
     private final ServerManager target;
     private final String[] param;

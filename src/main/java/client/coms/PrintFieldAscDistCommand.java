@@ -9,7 +9,7 @@ public class PrintFieldAscDistCommand extends AbstractCommand{
 
     @Override
     public String execute() {
-        getTarget().addCommandToHistiry("print_field_ascending_distance");
+        getTarget().addCommandToHistory("print_field_ascending_distance");
         return getTarget().printAscDist();
     }
 

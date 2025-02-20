@@ -25,7 +25,7 @@ public class UpdateCommand extends AbstractCommand{
     //public AddCommand(String a) {}
 
     public String execute(){
-        getTarget().addCommandToHistiry("update");
+        getTarget().addCommandToHistory("update");
         return getTarget().update(id,route);
     }
 

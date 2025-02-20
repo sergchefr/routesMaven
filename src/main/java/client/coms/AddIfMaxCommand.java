@@ -19,7 +19,7 @@ private final Route route;
     }
 
     public String execute(){
-        getTarget().addCommandToHistiry("add_if_max");
+        getTarget().addCommandToHistory("add_if_max");
         return getTarget().addIfMax(route);
     }
 
