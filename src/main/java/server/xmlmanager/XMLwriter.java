@@ -10,7 +10,7 @@ public class XMLwriter {
     public void writeRoute(Route[] routes, String filename)throws IOException{
 
         File savefolder = new File(System.getProperty("java.class.path")+"\\resources"+"\\saves");
-
+        System.out.println(savefolder.getPath());
         File file;
         savefolder.mkdirs();
         if(filename.contains(".xml")){

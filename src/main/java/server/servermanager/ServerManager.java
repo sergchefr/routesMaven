@@ -55,12 +55,12 @@ public class ServerManager implements Commands{
         try{
             ArrayList<Route> routes=reader.getRoutes(filename);
             for (Route route : routes) {
-                while((add(route)).equals("element is already in collection")){
+                while((add(route)).equals("element is already in the collection")){
                     route = new Route(route.getId()+1, route.getName(), route.getCreationDate(),route.getFromLocation(),route.getToLocation(), route.getDistance());
                 }
             }
         }catch (IOException e){
-            return "error while opening file: "+e;
+            return "error while opening file: "+ filename;
         }
         return "file loaded";
     }

@@ -21,7 +21,10 @@ public class ConsoleIO {
         System.out.println("program started. Type commands or \"help\" for help");
         while(true){
             String resp = clientManager.getResponse().getMessage();
-            if(!resp.isEmpty()) System.out.println(resp);
+            while (!resp.isEmpty()) {
+                System.out.println(resp);
+                resp = clientManager.getResponse().getMessage();
+            }
 
             System.out.print(">>> ");
             String command = console.nextLine();
@@ -48,7 +51,7 @@ public class ConsoleIO {
                             q=clientManager.getCommand(comName, param);
                             System.out.println(comName+": "+q.description());
                         } catch (IllegalParamException e) {
-                            System.out.println("Error. Cant get the "+comName+" description");
+                            System.out.println("Error. Cant get the "+comName+" description\n");
                         }
                     }
                     break;
@@ -67,7 +70,7 @@ public class ConsoleIO {
                         q = clientManager.getCommand(com, param);
                         clientManager.execCommand(q);
                     } catch (IllegalParamException e) {
-                        System.out.println("Illegal parameters");
+                        System.out.println("Illegal parameters\n");
                     }
                     break;
                 case("update"):
@@ -78,10 +81,10 @@ public class ConsoleIO {
                         q = clientManager.getCommand(com, param);
                         clientManager.execCommand(q);
                     } catch (IllegalParamException e) {
-                        System.out.println("Illegal parameters");
+                        System.out.println("Illegal parameters\n");
                     }
                     break;
-                case("remove_by_id"):
+                case"remove_by_id", "remove":
                     if(param==null){
                         System.out.print("type id: ");
                         param = new String[1];
@@ -90,14 +93,14 @@ public class ConsoleIO {
                             q = clientManager.getCommand(com, param);
                             clientManager.execCommand(q);
                         } catch (IllegalParamException e) {
-                            System.out.println("Illegal parameters");
+                            System.out.println("Illegal parameters\n");
                         }
                     }else if(param.length ==1){
                         try {
                             q = clientManager.getCommand(com, param);
                             clientManager.execCommand(q);
                         } catch (IllegalParamException e) {
-                            System.out.println("Illegal parameters");
+                            System.out.println("Illegal parameter\ns");
                         }
                     }
                     break;
@@ -105,7 +108,7 @@ public class ConsoleIO {
                     try{
                         clientManager.execScript(param[0]);
                     }catch (IOException|NullPointerException e){
-                        System.out.println("error while opening the file");
+                        System.out.println("error while opening the file"+e.getMessage()+"\n");
                     }
                     break;
                 case("add_if_max"):
@@ -114,7 +117,7 @@ public class ConsoleIO {
                         q = clientManager.getCommand(com, param);
                         clientManager.execCommand(q);
                     } catch (IllegalParamException e) {
-                        System.out.println("Illegal parameters");
+                        System.out.println("Illegal parameters\n");
                     }
                     break;
                 case("add_if_min"):
@@ -123,7 +126,7 @@ public class ConsoleIO {
                         q = clientManager.getCommand(com, param);
                         clientManager.execCommand(q);
                     } catch (IllegalParamException e) {
-                        System.out.println("Illegal parameters");
+                        System.out.println("Illegal parameters\n");
                     }
                     break;
                 case"load","save" :
@@ -131,11 +134,11 @@ public class ConsoleIO {
                         q = clientManager.getCommand(com, param);
                         clientManager.execCommand(q);
                     } catch (IllegalParamException e) {
-                        System.out.println("Illegal parameters");
+                        System.out.println("Illegal parameters\n");
                     }
                     break;
                 default:
-                    System.out.println("unidentified command");
+                    System.out.println("unidentified command\n");
 
             }
         }
@@ -160,8 +163,8 @@ public class ConsoleIO {
         System.out.println("type coordinates of the destination location. use \",\" as separator");
         System.out.print("x:int, y:int z:float: ");
         String[] toCoordinates = console.nextLine().strip().split(",");
-        for (int i = 0; i < fromCoordinates.length; i++) {
-            c=c+fromCoordinates[i].strip()+" ";
+        for (int i = 0; i < toCoordinates.length; i++) {
+            c=c+toCoordinates[i].strip()+" ";
         }
 
         System.out.print("type the location name: ");

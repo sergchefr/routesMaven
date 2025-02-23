@@ -12,7 +12,7 @@ public class Main {
         clientManager.setServerManager(servermanager);
         servermanager.setClientManager(clientManager);
 
-        clientManager.init("JAVA_SAVE_ROUTE");
+        clientManager.init("JAVA_SAVE_ROUTE");//переменная окружения
 
         clientManager.addnewCommand("add", AddCommand.class);
         clientManager.addnewCommand("add_if_max", AddIfMaxCommand.class);
@@ -34,4 +34,4 @@ public class Main {
         ConsoleIO console= new ConsoleIO(clientManager);
         console.start();
     }
-}
+}//execute_script C:\Users\sergei\Desktop\routesave\script.txt

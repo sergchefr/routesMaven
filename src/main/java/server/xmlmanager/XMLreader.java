@@ -10,7 +10,6 @@ import java.util.*;
 public class XMLreader {
     private String read(String filepath) throws IOException {
         if(!(filepath.contains("\\")|filepath.contains("/"))){
-            System.out.println(filepath.contains("\\"));
             //если это сокращенное название
             File savefolder = new File(System.getProperty("java.class.path")+"\\resources"+"\\saves");
             File file;

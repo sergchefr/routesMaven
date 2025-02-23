@@ -27,11 +27,12 @@ public class ClientManager {
     }
 
     public AbstractCommand getCommand(String comName, String[] param) throws IllegalParamException {
+        if(!coms.containsKey(comName)) throw new IllegalParamException("Wrong name");
         Constructor<?> constructor = coms.get(comName).getConstructors()[0];
         try {
             return (AbstractCommand) constructor.newInstance(serverManager, param);
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
-                throw new IllegalParamException("Неверные параметры");
+                throw new IllegalParamException("Wrong parameters");
             }
     }
 

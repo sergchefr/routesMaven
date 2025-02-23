@@ -41,7 +41,7 @@ public class ScriptReader {
                 q = clientManager.getCommand(s,f);
                 clientManager.execCommand(q);
             } catch (IllegalParamException e) {
-                clientManager.giveResponse(new Response("Cant execute "+s+". Bad parameters"));
+                clientManager.giveResponse(new Response("Cant execute "+s+". "+e.getMessage()));
             }
 
         }
