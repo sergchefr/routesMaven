@@ -15,8 +15,8 @@ private Route route;
         if(!param[0].equals("%description%")) {
             try {
                 this.route = routeParse(param);
-            } catch (IOException e) {
-                throw new IOException(e);
+            } catch (IllegalArgumentException e) {
+                throw new IllegalArgumentException(e);
             }
         }
     }
@@ -32,28 +32,32 @@ private Route route;
         return "adds a new route to the collection";
     }
 
-    private Route routeParse(String[] parm)throws IOException{
-        //String[] parm = param.split(" ");
+    private Route routeParse(String[] parm)throws IllegalArgumentException{
+        Location from = null;
+        Location to = null;
+        float dist = 0;
+        String name = null;
+        try {
+            int fromx = Integer.parseInt(parm[0]);
+            int fromy = Integer.parseInt(parm[1]);
+            float fromz = Float.parseFloat(parm[2]);
+            from = new Location(fromx, fromy, fromz, parm[3]);
 
-        //public Route(String name,Location from, Location to, Float distance)
-        // public Location(Integer x, Integer y, Float z, String name)
-        int fromx = Integer.parseInt(parm[0]);
-        int fromy = Integer.parseInt(parm[1]);
-        float fromz = Float.parseFloat(parm[2]);
-        Location from = new Location(fromx, fromy, fromz, parm[3]);
+            int tox = Integer.parseInt(parm[4]);
+            int toy = Integer.parseInt(parm[5]);
+            float toz = Float.parseFloat(parm[6]);
+            to = new Location(tox, toy, toz, parm[7]);
 
-        int tox = Integer.parseInt(parm[4]);
-        int toy = Integer.parseInt(parm[5]);
-        float toz = Float.parseFloat(parm[6]);
-        Location to = new Location(tox, toy, toz, parm[7]);
+            dist = Float.parseFloat(parm[8]);
 
-        float dist = Float.parseFloat(parm[8]);
-
-        String name = parm[9];
+            name = parm[9];
+        } catch (Exception e) {
+            throw new IllegalArgumentException();
+        }
         try {
             return new Route(name, from, to, dist);
         }catch (IOException e){
-            throw new IOException(e);
+            throw new IllegalArgumentException(e);
         }
     }
 }

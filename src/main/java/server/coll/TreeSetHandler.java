@@ -3,8 +3,7 @@ package server.coll;
 import java.io.IOException;
 import java.util.*;
 import server.xmlmanager.*;
-//TODO удалить лишние команды, интерфейс
-public class TreeSetHandler implements Commands {
+public class TreeSetHandler {
     private Collection coll;
     private Date initDate;
     public TreeSetHandler() {
@@ -138,37 +137,7 @@ public class TreeSetHandler implements Commands {
         return s;
     }
 
-    public String save(String filename){
-        XMLwriter writer=new XMLwriter();
-        try {
-            writer.writeRoute((Route[]) coll.toArray(new Route[0]), filename);
-        }catch (IOException e){
-            return "can`t create the file";
-        }
-        return "collection saved";
-    }
-
-    public String load(String filename){
-        XMLreader reader = new XMLreader();
-        try{
-            ArrayList<Route> routes=reader.getRoutes(filename);
-            for (Route route : routes) {
-                while((add(route)).equals("element is already in collection")){
-                    route = new Route(route.getId()+1, route.getName(), route.getCreationDate(),route.getFromLocation(),route.getToLocation(), route.getDistance());
-                }
-            }
-        }catch (IOException e){
-            return "error while opening file: "+e;
-        }
-        return "file loaded";
-    }
-
     public Route[] getAllRoutes(){
        return (Route[]) coll.toArray(new Route[0]);
-    }
-
-    @Override
-    public String showHistory() {
-        return "";
     }
 }

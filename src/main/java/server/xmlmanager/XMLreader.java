@@ -1,18 +1,27 @@
 package server.xmlmanager;
 import server.coll.Route;
 import server.coll.Location;
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+
+import java.io.*;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class XMLreader {
-    //TODO исправить filepath
     private String read(String filepath) throws IOException {
-        //ArrayList<String> commands = new ArrayList<>();
+        if(!(filepath.contains("\\")|filepath.contains("/"))){
+            System.out.println(filepath.contains("\\"));
+            //если это сокращенное название
+            File savefolder = new File(System.getProperty("java.class.path")+"\\resources"+"\\saves");
+            File file;
+            savefolder.mkdirs();
+            if(filepath.contains(".xml")){
+                file = new File(savefolder.getPath()+"\\"+filepath);
+            }else{
+                file = new File(savefolder.getPath()+"\\"+filepath+".xml");
+            }
+            filepath = file.getPath();
+        }
         String str ="";
         try (BufferedReader bfr = new BufferedReader(new InputStreamReader(new FileInputStream(filepath)))) {
             String nl;

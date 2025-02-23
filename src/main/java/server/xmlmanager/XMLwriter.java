@@ -7,11 +7,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class XMLwriter {
-
-    //TODO исправить filepath
     public void writeRoute(Route[] routes, String filename)throws IOException{
 
-        File savefolder = new File(System.getProperty("java.class.path")+"\\data"+"\\saves");
+        File savefolder = new File(System.getProperty("java.class.path")+"\\resources"+"\\saves");
 
         File file;
         savefolder.mkdirs();

@@ -1,6 +1,8 @@
 package client.clientmanager;
 
 import client.coms.AbstractCommand;
+import client.coms.IllegalParamException;
+import client.coms.LoadCommand;
 import client.coms.Response;
 import server.servermanager.ServerManager;
 
@@ -20,15 +22,16 @@ public class ClientManager {
     public ClientManager(ServerManager serverManager) {
         this.serverManager = serverManager;
         reader = new ScriptReader(this);
+
         //client.coms.put("add",new AddCommand(new TreeSetHandler(), new String()));
     }
 
-    public AbstractCommand getCommand(String comName, String[] param){
+    public AbstractCommand getCommand(String comName, String[] param) throws IllegalParamException {
         Constructor<?> constructor = coms.get(comName).getConstructors()[0];
         try {
             return (AbstractCommand) constructor.newInstance(serverManager, param);
-        } catch (/*IOException |*/ InstantiationException | IllegalAccessException | InvocationTargetException e) {
-                throw new RuntimeException(e);
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
+                throw new IllegalParamException("Неверные параметры");
             }
     }
 
@@ -67,8 +70,13 @@ public class ClientManager {
         try {
             reader.execute(filepath);
         } catch (IOException e) {
-            //TODO добавить спец. исключение для инициализации команды
             throw new IOException(e);
         }
+    }
+
+    public void init(String rt){
+        String[] pr = new String[1];
+        pr[0] = System.getenv(rt);
+        serverManager.addCommand(new LoadCommand(serverManager, pr));
     }
 }

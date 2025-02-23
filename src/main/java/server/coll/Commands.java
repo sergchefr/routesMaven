@@ -1,6 +1,5 @@
 package server.coll;
-//TODO добавить addhistory
-/** Интерфейс с командами управления коллекцией*/
+/** Интерфейс с командами управления серверной частью*/
 public interface Commands {
     public String save(String filename);
     public String load(String filename);
@@ -18,4 +17,5 @@ public interface Commands {
     public String printAsc();
     public String printAscDist();
     public String showHistory();
+    public void addCommandToHistiry(String com);
 }

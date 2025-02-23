@@ -3,6 +3,7 @@ package client.consoleIO;
 import client.clientmanager.ClientManager;
 import client.clientmanager.ScriptReader;
 import client.coms.AbstractCommand;
+import client.coms.IllegalParamException;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -43,8 +44,12 @@ public class ConsoleIO {
                     for (String comName : comNames) {
                         param = new String[1];
                         param[0] = "%description%";
-                        q=clientManager.getCommand(comName, param);
-                        System.out.println(comName+": "+q.description());
+                        try {
+                            q=clientManager.getCommand(comName, param);
+                            System.out.println(comName+": "+q.description());
+                        } catch (IllegalParamException e) {
+                            System.out.println("Error. Cant get the "+comName+" description");
+                        }
                     }
                     break;
                 case "info","show","exit","clear","history","average_of_distance","print_ascending","print_field_ascending_distance":
@@ -58,26 +63,42 @@ public class ConsoleIO {
                 case("add"):
                     //String c = rangeConstructor();
                     param = rangeConstructor().split(" ");
-                    q = clientManager.getCommand(com, param);
-                    clientManager.execCommand(q);
+                    try {
+                        q = clientManager.getCommand(com, param);
+                        clientManager.execCommand(q);
+                    } catch (IllegalParamException e) {
+                        System.out.println("Illegal parameters");
+                    }
                     break;
                 case("update"):
                     System.out.print("type id: ");
                     String a = console.nextLine().strip()+" "+rangeConstructor();
                     param = a.split(" ");
-                    q = clientManager.getCommand(com, param);
-                    clientManager.execCommand(q);
+                    try {
+                        q = clientManager.getCommand(com, param);
+                        clientManager.execCommand(q);
+                    } catch (IllegalParamException e) {
+                        System.out.println("Illegal parameters");
+                    }
                     break;
                 case("remove_by_id"):
                     if(param==null){
                         System.out.print("type id: ");
                         param = new String[1];
                         param[0]=console.nextLine().strip();
-                        q = clientManager.getCommand(com, param);
-                        clientManager.execCommand(q);
+                        try {
+                            q = clientManager.getCommand(com, param);
+                            clientManager.execCommand(q);
+                        } catch (IllegalParamException e) {
+                            System.out.println("Illegal parameters");
+                        }
                     }else if(param.length ==1){
-                        q = clientManager.getCommand(com, param);
-                        clientManager.execCommand(q);
+                        try {
+                            q = clientManager.getCommand(com, param);
+                            clientManager.execCommand(q);
+                        } catch (IllegalParamException e) {
+                            System.out.println("Illegal parameters");
+                        }
                     }
                     break;
                 case("execute_script"):
@@ -88,20 +109,30 @@ public class ConsoleIO {
                     }
                     break;
                 case("add_if_max"):
-                    //TODO
                     param = rangeConstructor().split(" ");
-                    q = clientManager.getCommand(com, param);
-                    clientManager.execCommand(q);
+                    try {
+                        q = clientManager.getCommand(com, param);
+                        clientManager.execCommand(q);
+                    } catch (IllegalParamException e) {
+                        System.out.println("Illegal parameters");
+                    }
                     break;
                 case("add_if_min"):
-                    //TODO
                     param = rangeConstructor().split(" ");
-                    q = clientManager.getCommand(com, param);
-                    clientManager.execCommand(q);
+                    try {
+                        q = clientManager.getCommand(com, param);
+                        clientManager.execCommand(q);
+                    } catch (IllegalParamException e) {
+                        System.out.println("Illegal parameters");
+                    }
                     break;
                 case"load","save" :
-                    q = clientManager.getCommand(com, param);
-                    clientManager.execCommand(q);
+                    try {
+                        q = clientManager.getCommand(com, param);
+                        clientManager.execCommand(q);
+                    } catch (IllegalParamException e) {
+                        System.out.println("Illegal parameters");
+                    }
                     break;
                 default:
                     System.out.println("unidentified command");
@@ -118,7 +149,8 @@ public class ConsoleIO {
         System.out.println("type coordinates of from location. use \",\" as separator");
         System.out.print("x:int, y:int z:float: ");
         String[] fromCoordinates = console.nextLine().strip().split(",");
-        for (int i = 0; i < 3; i++) {
+
+        for (int i = 0; i < fromCoordinates.length; i++) {
             c=c+fromCoordinates[i].strip()+" ";
         }
 
@@ -128,7 +160,7 @@ public class ConsoleIO {
         System.out.println("type coordinates of the destination location. use \",\" as separator");
         System.out.print("x:int, y:int z:float: ");
         String[] toCoordinates = console.nextLine().strip().split(",");
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < fromCoordinates.length; i++) {
             c=c+fromCoordinates[i].strip()+" ";
         }
 

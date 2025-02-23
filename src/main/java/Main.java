@@ -3,15 +3,16 @@ import client.consoleIO.ConsoleIO;
 import server.coll.*;
 import client.coms.*;
 import server.servermanager.ServerManager;
-//TODO добаить чтение нач файла из пересенной окружения
 public class Main {
     public static void main(String[] args) {
         TreeSetHandler tsh = new TreeSetHandler();
 
-        ClientManager clientManager = new ClientManager(null);
         ServerManager servermanager =  new ServerManager(null,tsh);
+        ClientManager clientManager = new ClientManager(null);
         clientManager.setServerManager(servermanager);
         servermanager.setClientManager(clientManager);
+
+        clientManager.init("JAVA_SAVE_ROUTE");
 
         clientManager.addnewCommand("add", AddCommand.class);
         clientManager.addnewCommand("add_if_max", AddIfMaxCommand.class);

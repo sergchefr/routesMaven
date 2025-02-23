@@ -1,6 +1,8 @@
 package client.clientmanager;
 
 import client.coms.AbstractCommand;
+import client.coms.IllegalParamException;
+import client.coms.Response;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -34,7 +36,14 @@ public class ScriptReader {
         for (String command : commands) {
             s= command.strip().split(" ")[0];
             f= Arrays.copyOfRange(command.strip().split(" "),1,command.strip().split(" ").length);
-            clientManager.execCommand(clientManager.getCommand(s,f));
+            AbstractCommand q = null;
+            try {
+                q = clientManager.getCommand(s,f);
+                clientManager.execCommand(q);
+            } catch (IllegalParamException e) {
+                clientManager.giveResponse(new Response("Cant execute "+s+". Bad parameters"));
+            }
+
         }
     }
 }
