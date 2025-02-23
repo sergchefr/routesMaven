@@ -25,8 +25,6 @@ public class ServerManager implements Commands{
         this.collhandler = collhandler;
     }
 
-    //public ServerManager() {}
-
     public void execute(){
         Response response;
         if(!coms.isEmpty()) response = new Response(coms.pollFirst().execute());

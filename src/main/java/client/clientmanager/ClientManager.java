@@ -4,6 +4,7 @@ import client.coms.AbstractCommand;
 import client.coms.Response;
 import server.servermanager.ServerManager;
 
+import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayDeque;
@@ -13,10 +14,12 @@ public class ClientManager {
     private ServerManager serverManager;
     private ArrayDeque<Response> responses = new ArrayDeque<>();
     private HashMap<String, Class> coms = new HashMap<>();
+    private ScriptReader reader;
     private ArrayDeque<AbstractCommand> commandQueue= new ArrayDeque<>();
 
     public ClientManager(ServerManager serverManager) {
         this.serverManager = serverManager;
+        reader = new ScriptReader(this);
         //client.coms.put("add",new AddCommand(new TreeSetHandler(), new String()));
     }
 
@@ -56,8 +59,16 @@ public class ClientManager {
         serverManager.addCommand(commandQueue.pollFirst());
     }
 
+    public String[] getCommandNames(){
+        return coms.keySet().toArray(new String[0]);
+    }
 
-
-
-
+    public void execScript(String filepath) throws IOException{
+        try {
+            reader.execute(filepath);
+        } catch (IOException e) {
+            //TODO добавить спец. исключение для инициализации команды
+            throw new IOException(e);
+        }
+    }
 }

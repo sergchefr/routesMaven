@@ -1,5 +1,5 @@
 package server.coll;
-
+//TODO добавить addhistory
 /** Интерфейс с командами управления коллекцией*/
 public interface Commands {
     public String save(String filename);

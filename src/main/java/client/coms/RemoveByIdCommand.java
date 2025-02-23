@@ -5,11 +5,13 @@ import server.servermanager.ServerManager;
 import java.io.IOException;
 
 public class RemoveByIdCommand extends AbstractCommand{
-    private final long id;
+    private long id;
 
     public RemoveByIdCommand(ServerManager target, String[] param) throws IOException {
         super(target,param);
-        this.id = Long.parseLong(param[0]);
+        if (!param[0].equals("%description%")) {
+            this.id = Long.parseLong(param[0]);
+        }
     }
 
     @Override

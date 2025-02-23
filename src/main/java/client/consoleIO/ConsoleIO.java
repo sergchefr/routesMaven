@@ -39,12 +39,21 @@ public class ConsoleIO {
 
             switch (com){
                 case("help"):
-                    q= clientManager.getCommand("help", param);
-                    clientManager.execCommand(q);
+                    String[] comNames= clientManager.getCommandNames();
+                    for (String comName : comNames) {
+                        param = new String[1];
+                        param[0] = "%description%";
+                        q=clientManager.getCommand(comName, param);
+                        System.out.println(comName+": "+q.description());
+                    }
                     break;
                 case "info","show","exit","clear","history","average_of_distance","print_ascending","print_field_ascending_distance":
-                    q = clientManager.getCommand(com, null);
-                    clientManager.execCommand(q);
+                    try {
+                        q = clientManager.getCommand(com, null);
+                        clientManager.execCommand(q);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
                     break;
                 case("add"):
                     //String c = rangeConstructor();
@@ -55,7 +64,6 @@ public class ConsoleIO {
                 case("update"):
                     System.out.print("type id: ");
                     String a = console.nextLine().strip()+" "+rangeConstructor();
-                    //a=a+rangeConstructor();
                     param = a.split(" ");
                     q = clientManager.getCommand(com, param);
                     clientManager.execCommand(q);
@@ -73,20 +81,20 @@ public class ConsoleIO {
                     }
                     break;
                 case("execute_script"):
-                    ScriptReader scriptReader = new ScriptReader(clientManager);
                     try{
-                        scriptReader.execute(param[1]);
-                    }catch (IOException e){
+                        clientManager.execScript(param[0]);
+                    }catch (IOException|NullPointerException e){
                         System.out.println("error while opening the file");
                     }
-
                     break;
                 case("add_if_max"):
+                    //TODO
                     param = rangeConstructor().split(" ");
                     q = clientManager.getCommand(com, param);
                     clientManager.execCommand(q);
                     break;
                 case("add_if_min"):
+                    //TODO
                     param = rangeConstructor().split(" ");
                     q = clientManager.getCommand(com, param);
                     clientManager.execCommand(q);

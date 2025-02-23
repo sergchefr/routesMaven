@@ -7,14 +7,16 @@ import server.servermanager.ServerManager;
 import java.io.IOException;
 
 public class AddIfMinCommand extends AbstractCommand{
-    private final Route route;
+    private Route route;
 
     public AddIfMinCommand(ServerManager target, String[] param) throws IOException {
         super(target, param);
-        try {
-            this.route = routeParse(param);
-        } catch (IOException e) {
-            throw new IOException(e);
+        if (!param[0].equals("%description%")) {
+            try {
+                this.route = routeParse(param);
+            } catch (IOException e) {
+                throw new IOException(e);
+            }
         }
     }
 

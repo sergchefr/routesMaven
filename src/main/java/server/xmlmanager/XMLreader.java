@@ -10,6 +10,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class XMLreader {
+    //TODO исправить filepath
     private String read(String filepath) throws IOException {
         //ArrayList<String> commands = new ArrayList<>();
         String str ="";

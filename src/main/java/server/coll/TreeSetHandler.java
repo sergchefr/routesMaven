@@ -3,7 +3,7 @@ package server.coll;
 import java.io.IOException;
 import java.util.*;
 import server.xmlmanager.*;
-
+//TODO удалить лишние команды, интерфейс
 public class TreeSetHandler implements Commands {
     private Collection coll;
     private Date initDate;

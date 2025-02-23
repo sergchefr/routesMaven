@@ -9,16 +9,18 @@ import java.util.Arrays;
 
 public class UpdateCommand extends AbstractCommand{
 
-    private final Route route;
-    private final long id;
+    private Route route;
+    private long id;
 
     public UpdateCommand(ServerManager target, String[] param) throws IOException {
         super(target,param);
-        this.id = Long.parseLong(param[0]);
-        try {
-            this.route = routeParse(Arrays.copyOfRange(param, 1, 11));
-        } catch (IOException e) {
-            throw new IOException(e);
+        if (!param[0].equals("%description%")) {
+            this.id = Long.parseLong(param[0]);
+            try {
+                this.route = routeParse(Arrays.copyOfRange(param, 1, 11));
+            } catch (IOException e) {
+                throw new IOException(e);
+            }
         }
     }
 

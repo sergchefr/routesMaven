@@ -3,7 +3,7 @@ import client.consoleIO.ConsoleIO;
 import server.coll.*;
 import client.coms.*;
 import server.servermanager.ServerManager;
-
+//TODO добаить чтение нач файла из пересенной окружения
 public class Main {
     public static void main(String[] args) {
         TreeSetHandler tsh = new TreeSetHandler();
