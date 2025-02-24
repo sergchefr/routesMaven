@@ -6,7 +6,11 @@ import java.io.IOException;
 
 public class RemoveByIdCommand extends AbstractCommand{
     private long id;
-
+    /**
+     * Команда для удаления пути с указанным id
+     * @param target класс-адресат
+     * @param param long:id
+     */
     public RemoveByIdCommand(ServerManager target, String[] param) throws IOException {
         super(target,param);
         if (!param[0].equals("%description%")) {

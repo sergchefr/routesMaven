@@ -11,6 +11,9 @@ import java.io.IOException;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 
+/**
+ * Класс, управляющий функциями сервера и взаимодействующий с управляющим классом клиентской части
+ */
 public class ServerManager implements Commands{
 
     private ClientManager clientManager;

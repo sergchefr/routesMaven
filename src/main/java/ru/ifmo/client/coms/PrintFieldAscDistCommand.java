@@ -3,6 +3,11 @@ package ru.ifmo.client.coms;
 import ru.ifmo.server.servermanager.ServerManager;
 
 public class PrintFieldAscDistCommand extends AbstractCommand{
+    /**
+     * Команда для вывода отсортированного массива всех расстояний элементов коллекции
+     * @param target класс-адресат
+     * @param param не учитывается
+     */
     public PrintFieldAscDistCommand(ServerManager target, String[] param) {
         super(target, param);
     }

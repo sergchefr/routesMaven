@@ -2,6 +2,9 @@ package ru.ifmo.client.coms;
 
 import ru.ifmo.server.servermanager.ServerManager;
 
+/**
+ * Абстрактный класс команды. Содержит базовый конструктор и абстрактные методы
+ */
 public  abstract class AbstractCommand{
     private final ServerManager target;
     private final String[] param;

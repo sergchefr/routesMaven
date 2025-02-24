@@ -1,9 +1,15 @@
 package ru.ifmo.client.coms;
 
 import ru.ifmo.server.servermanager.ServerManager;
-
+/**
+ * Команда для просмотра истории выполненных команд(кроме help)
+ */
 public class HistoryCommand extends AbstractCommand{
-
+    /**
+     * Команда для просмотра истории выполненных команд(кроме help)
+     * @param target класс-адресат
+     * @param param не учитывается
+     */
     public HistoryCommand(ServerManager target, String[] param) {
         super(target, param);
     }

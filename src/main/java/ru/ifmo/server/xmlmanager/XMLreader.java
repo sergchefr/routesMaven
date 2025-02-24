@@ -7,6 +7,9 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
+/**
+ * Класс, читающий XML и возвращающий объекты из них
+ */
 public class XMLreader {
     private String read(String filepath) throws IOException {
         if(!(filepath.contains("\\")|filepath.contains("/"))){

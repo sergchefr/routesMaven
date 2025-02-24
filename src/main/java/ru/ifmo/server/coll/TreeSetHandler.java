@@ -3,6 +3,9 @@ package ru.ifmo.server.coll;
 import java.io.IOException;
 import java.util.*;
 
+/**
+ * Класс, управляющий коллекцией
+ */
 public class TreeSetHandler {
     private final Collection<Route> coll;
     private final Date initDate;

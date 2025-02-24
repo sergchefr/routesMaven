@@ -2,6 +2,9 @@ package ru.ifmo.server.history;
 
 import java.util.ArrayDeque;
 
+/**
+ * Класс, хранящий последние 12 выполненных команд
+ */
 public class History {
     //String filepath;
     ArrayDeque<String> lcoms = new ArrayDeque<>();

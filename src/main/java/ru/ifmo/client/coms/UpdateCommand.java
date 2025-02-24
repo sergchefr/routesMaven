@@ -6,12 +6,20 @@ import ru.ifmo.server.servermanager.ServerManager;
 
 import java.io.IOException;
 import java.util.Arrays;
-
+/**
+ * Команда для обновления {@link Route} в коллекции по указанному id
+ */
 public class UpdateCommand extends AbstractCommand{
 
     private Route route;
     private long id;
-
+    /**
+     * Команда для обновления {@link Route} в коллекции по указанному id
+     * @param target класс-адресат
+     * @param param набор строк, описывающих {@link Route}
+     *              {long:id, int:fromX, int:fromY, float:fromZ, String:FromName, int:toX, int:toY, float:toZ, String:ToName, float:dist, String:RouteName}
+     * @throws IOException если невозможно создать {@link Route} с данными параметрами
+     */
     public UpdateCommand(ServerManager target, String[] param) throws IOException {
         super(target,param);
         if (!param[0].equals("%description%")) {

@@ -6,9 +6,17 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+/** Класс, записывающий объекты в XML.
+ *
+ */
 public class XMLwriter {
-    public void writeRoute(Route[] routes, String filename)throws IOException{
 
+    /** Принимает массив путей
+     * @param routes массив путей
+     * @param filename путь к файлу ли название сохранения
+     * @throws IOException если не удается создать файл
+     */
+    public void writeRoute(Route[] routes, String filename)throws IOException{
         File savefolder = new File(System.getProperty("java.class.path")+"\\..\\"+"\\resources"+"\\saves");
         System.out.println(savefolder.getPath());
         File file;

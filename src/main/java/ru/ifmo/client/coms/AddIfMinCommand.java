@@ -5,10 +5,18 @@ import ru.ifmo.server.coll.Route;
 import ru.ifmo.server.servermanager.ServerManager;
 
 import java.io.IOException;
-
+/**
+ * Команда для добавления {@link Route} в коллекцию с проверкой на минимальность дистанции
+ */
 public class AddIfMinCommand extends AbstractCommand{
     private Route route;
-
+    /**
+     * Команда для добавления {@link Route} в коллекцию с проверкой на минимальность дистанции
+     * @param target класс-адресат
+     * @param param набор строк, описывающих {@link Route}
+     *              {int:fromX, int:fromY, float:fromZ, String:FromName, int:toX, int:toY, float:toZ, String:ToName, float:dist, String:RouteName}
+     * @throws IOException если невозможно создать {@link Route} с данными параметрами
+     */
     public AddIfMinCommand(ServerManager target, String[] param) throws IOException {
         super(target, param);
         if (!param[0].equals("%description%")) {

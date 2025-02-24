@@ -11,6 +11,9 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Класс, читающий скрипты в файле
+ */
 public class ScriptReader {
     private ArrayList<String> commands = new ArrayList<>();
     private final ClientManager clientManager;
@@ -19,6 +22,12 @@ public class ScriptReader {
         this.clientManager = clientManager;
     }
 
+    /**
+     * Метод, читающий скрипт из файла. Передает соответсвующую команду управляющему классу
+     * или, если она не может быть создана, передает соответсвующий ответ в управляющий класс
+     * @param filepath путь к файлу
+     * @throws IOException если файл не может быть открыт
+     */
     public void execute(String filepath) throws IOException{
         try(BufferedReader bfr = new BufferedReader(new InputStreamReader(new FileInputStream(filepath)))){
             String nl;

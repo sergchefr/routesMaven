@@ -12,10 +12,17 @@ public class ConsoleIO {
     Scanner console = new Scanner(System.in);
     ClientManager clientManager;
 
+    /**
+     * Класс, осуществляющий ввод-вывод
+     * @param clientManager класс, управляющий фуенкциями клиента
+     */
     public ConsoleIO(ClientManager clientManager) {
         this.clientManager = clientManager;
     }
 
+    /**
+     * Метод, собственно, осуществляющий ввод из консоли и вывод очереди ответов из управляющего класса
+     */
     public void start(){
         System.out.println("program started. Type commands or \"help\" for help");
         while(true){
