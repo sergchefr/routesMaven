@@ -114,6 +114,10 @@ public class ClientManager {
     public void init(String rt){
         String[] pr = new String[1];
         pr[0] = System.getenv(rt);
-        serverManager.addCommand(new LoadCommand(serverManager, pr));
+        if (pr[0]==null){
+            giveResponse(new Response("no such environment variable"));
+        }else{
+            serverManager.addCommand(new LoadCommand(serverManager, pr));
+        }
     }
 }

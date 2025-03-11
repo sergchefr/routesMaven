@@ -3,6 +3,8 @@ import ru.ifmo.server.coll.Route;
 import ru.ifmo.server.coll.Location;
 
 import java.io.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -12,18 +14,20 @@ import java.util.*;
  */
 public class XMLreader {
     private String read(String filepath) throws IOException {
-        if(!(filepath.contains("\\")|filepath.contains("/"))){
-            //если это сокращенное название
-            File savefolder = new File(System.getProperty("java.class.path")+"\\..\\"+"\\resources"+"\\saves");
-            File file;
-            savefolder.mkdirs();
-            if(filepath.contains(".xml")){
-                file = new File(savefolder.getPath()+"\\"+filepath);
-            }else{
-                file = new File(savefolder.getPath()+"\\"+filepath+".xml");
-            }
-            filepath = file.getPath();
-        }
+//        if(!(filepath.contains("\\")|filepath.contains("/"))){
+//            //если это сокращенное название
+//            Path path = Paths.get(System.getProperty("java.class.path")+"/../"+"/resources"+"/saves");
+//            File savefolder = path.toFile();
+//            //File savefolder = new File(System.getProperty("java.class.path")+"/../"+"/resources"+"/saves");
+//            File file;
+//            savefolder.mkdirs();
+//            if(filepath.contains(".xml")){
+//                file = Paths.get(path.toUri()+"/"+filepath).toFile();
+//            }else{
+//                file = Paths.get(path.toUri()+"/"+filepath+".xml").toFile();
+//            }
+//            filepath = file.getPath();
+//        }
         String str ="";
         try (BufferedReader bfr = new BufferedReader(new InputStreamReader(new FileInputStream(filepath)))) {
             String nl;

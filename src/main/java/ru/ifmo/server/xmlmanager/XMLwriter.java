@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /** Класс, записывающий объекты в XML.
  *
@@ -17,19 +19,24 @@ public class XMLwriter {
      * @throws IOException если не удается создать файл
      */
     public void writeRoute(Route[] routes, String filename)throws IOException{
-        File savefolder = new File(System.getProperty("java.class.path")+"\\..\\"+"\\resources"+"\\saves");
-        System.out.println(savefolder.getPath());
-        File file;
-        System.out.println(savefolder.mkdirs());
-        if(filename.contains(".xml")){
-            file = new File(savefolder.getPath()+"\\"+filename);
-        }else{
-            file = new File(savefolder.getPath()+"\\"+filename+".xml");
-        }
+        File file=new File(filename);
+//        if(!(filename.contains("\\")|filename.contains("/"))) {
+//            Path path = Paths.get(/*System.getProperty("java.class.path") + "/../" + */"/resources" + "/saves");
+//            File savefolder = path.toFile();
+//            System.out.println(savefolder.getPath());
+//            System.out.println(savefolder.mkdirs());
+//            if (filename.contains(".xml")) {
+//                file = Paths.get(path.toUri() + "/" + filename).toFile();
+//            } else {
+//                file = Paths.get(path.toUri() + "/" + filename + ".xml").toFile();
+//            }
+//        }
 
         try{
+            System.out.println(file.getPath());
             file.createNewFile();
         } catch (IOException e) {
+            System.out.println(e);
             throw new IOException("error while creating file");
         }
 

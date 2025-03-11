@@ -2,7 +2,7 @@ package ru.ifmo.server.coll;
 
 import java.util.Objects;
 
-/** Класс, характеризующий некую локацию. Используется в {@link Route#}*/
+/** Класс, характеризующий некую локацию. используется в {@link Route}*/
 public class Location {
     private final Integer x; //Поле не может быть null
     private final Integer y; //Поле не может быть null

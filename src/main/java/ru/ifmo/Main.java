@@ -13,6 +13,7 @@ public class Main {
         ClientManager clientManager = new ClientManager(null);
         clientManager.setServerManager(servermanager);
         servermanager.setClientManager(clientManager);
+        servermanager.setClientManager(clientManager);
 
         clientManager.init("JAVA_SAVE_ROUTE");//переменная окружения
 

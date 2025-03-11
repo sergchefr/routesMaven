@@ -1,5 +1,5 @@
 package ru.ifmo.server.coll;
-/** Интерфейс с командами управления серверной частью*/
+/** интерфейс с командами управления серверной частью*/
 public interface Commands {
     String save(String filename);
     String load(String filename);
