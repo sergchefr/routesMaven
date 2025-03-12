@@ -1,8 +1,10 @@
 package ru.ifmo.server.xmlmanager;
+import ru.ifmo.client.coms.IllegalParamException;
 import ru.ifmo.server.coll.Route;
 import ru.ifmo.server.coll.Location;
 
 import java.io.*;
+import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.ZonedDateTime;
@@ -13,23 +15,16 @@ import java.util.*;
  * Класс, читающий XML и возвращающий объекты из них
  */
 public class XMLreader {
-    private String read(String filepath) throws IOException {
-//        if(!(filepath.contains("\\")|filepath.contains("/"))){
-//            //если это сокращенное название
-//            Path path = Paths.get(System.getProperty("java.class.path")+"/../"+"/resources"+"/saves");
-//            File savefolder = path.toFile();
-//            //File savefolder = new File(System.getProperty("java.class.path")+"/../"+"/resources"+"/saves");
-//            File file;
-//            savefolder.mkdirs();
-//            if(filepath.contains(".xml")){
-//                file = Paths.get(path.toUri()+"/"+filepath).toFile();
-//            }else{
-//                file = Paths.get(path.toUri()+"/"+filepath+".xml").toFile();
-//            }
-//            filepath = file.getPath();
-//        }
+    private String read(String filename) throws IOException {
+        Path filepath;
+        try {
+            filename = filename.replace("\\", "/");
+            filepath = Paths.get(filename);
+        }catch (InvalidPathException e){
+            throw new IOException(e);
+        }
         String str ="";
-        try (BufferedReader bfr = new BufferedReader(new InputStreamReader(new FileInputStream(filepath)))) {
+        try (BufferedReader bfr = new BufferedReader(new InputStreamReader(new FileInputStream(filepath.toFile())))) {
             String nl;
             String version = bfr.readLine();
             while (true) {
@@ -44,7 +39,7 @@ public class XMLreader {
         return str;
     }
 
-    public ArrayList<Route> getRoutes(String filename)throws IOException{
+    public ArrayList<Route> getRoutes(String filename)throws IOException, IllegalParamException{
         String[] coms;
         try {
             String str1 = read(filename);
@@ -52,16 +47,14 @@ public class XMLreader {
         }catch (IOException e){
             throw new IOException(e);
         }
-        //System.out.println(Arrays.toString(ru.ifmo.client.coms));
         Stack<String> cond = new Stack<>();
         HashMap<String, String> constr = new HashMap<>();
         ArrayList<Route> routes= new ArrayList<>();
         for (String s : coms) {
             if(s.contains("/")) {
                 String a = cond.pop();
-                //System.out.println(a);
                 if (a.equals("<route>")){
-                    //System.out.println("svo");
+                    try {
                         routes.add(new Route(
                                 Long.parseLong(constr.get("[<data>, <route>, <id>]")),
                                 constr.get("[<data>, <route>, <name>]"),
@@ -76,8 +69,10 @@ public class XMLreader {
                                         constr.get("[<data>, <route>, <locationTo>, <name>]")),
                                 Float.parseFloat(constr.get("[<data>, <route>, <distance>]"))
                         ));
+                    } catch (Exception e) {
+                        throw new IllegalParamException("wrong param");
+                    }
                 }
-
             }
             else if(s.contains("<")) cond.add(s);
             else constr.put(cond.toString(),s);

@@ -1,7 +1,6 @@
 package ru.ifmo.server.xmlmanager;
 
 import ru.ifmo.server.coll.Route;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -19,28 +18,11 @@ public class XMLwriter {
      * @throws IOException если не удается создать файл
      */
     public void writeRoute(Route[] routes, String filename)throws IOException{
-        File file=new File(filename);
-//        if(!(filename.contains("\\")|filename.contains("/"))) {
-//            Path path = Paths.get(/*System.getProperty("java.class.path") + "/../" + */"/resources" + "/saves");
-//            File savefolder = path.toFile();
-//            System.out.println(savefolder.getPath());
-//            System.out.println(savefolder.mkdirs());
-//            if (filename.contains(".xml")) {
-//                file = Paths.get(path.toUri() + "/" + filename).toFile();
-//            } else {
-//                file = Paths.get(path.toUri() + "/" + filename + ".xml").toFile();
-//            }
-//        }
 
-        try{
-            System.out.println(file.getPath());
-            file.createNewFile();
-        } catch (IOException e) {
-            System.out.println(e);
-            throw new IOException("error while creating file");
-        }
+        filename=filename.replace("\\","/");
+        Path filepath = Paths.get(filename);
 
-        try (PrintWriter writer = new PrintWriter(new FileWriter(file))) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(filepath.toFile()))) {
             writer.println("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>");
             writer.println("<data>");
             for (Route route : routes) {

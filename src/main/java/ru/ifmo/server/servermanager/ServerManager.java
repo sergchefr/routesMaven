@@ -54,18 +54,25 @@ public class ServerManager implements Commands{
 
     @Override
     public String load(String filename) {
+        int errorCounter=0;
         XMLreader reader = new XMLreader();
         try{
             ArrayList<Route> routes=reader.getRoutes(filename);
             for (Route route : routes) {
-                while((add(route)).equals("element is already in the collection")){
-                    route = new Route(route.getId()+1, route.getName(), route.getCreationDate(),route.getFromLocation(),route.getToLocation(), route.getDistance());
-                }
+                collhandler.add(route);
             }
+
+//            for (Route route : routes) {
+//                while((add(route)).equals("element is already in the collection")){
+//                    route = new Route(route.getId()+1, route.getName(), route.getCreationDate(),route.getFromLocation(),route.getToLocation(), route.getDistance());
+//                }
+//            }
         }catch (IOException e){
             return "error while opening file: "+ filename;
+        }catch (IllegalParamException e){
+            errorCounter+=1;
         }
-        return "file loaded";
+        return "file loaded, "+errorCounter+" errors";
     }
 
     @Override

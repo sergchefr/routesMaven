@@ -9,7 +9,7 @@ public class Route implements Comparable{
     private final Long id;//Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private static Long nextid=1L;
     private final String name; //Поле не может быть null, Строка не может быть пустой
-    private Coordinates coordinates; //Поле не может быть null
+    //private Coordinates coordinates; //Поле не может быть null
     private final java.util.Date creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
     private final Location from; //Поле может быть null
     private final Location to; //Поле не может быть null
@@ -73,9 +73,13 @@ public class Route implements Comparable{
         return name;
     }
 
-//    public Coordinates getCoordinates() {
-//        return coordinates;
-//    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Route route = (Route) o;
+        return Objects.equals(name, route.name) && Objects.equals(from, route.from) && Objects.equals(to, route.to) && Objects.equals(distance, route.distance);
+    }
 
     public Date getCreationDate() {
         return creationDate;

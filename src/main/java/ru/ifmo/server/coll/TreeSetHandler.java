@@ -7,23 +7,29 @@ import java.util.*;
  * Класс, управляющий коллекцией
  */
 public class TreeSetHandler {
-    private final Collection<Route> coll;
+    private final TreeSet<Route> coll;
     private final Date initDate;
     public TreeSetHandler() {
-        coll = new TreeSet<Route>();
+        coll = new TreeSet<>();
         this.initDate = new Date();
     }
 
-    public String add(Route obj){
-        Route route;
-        try{
-            route = obj;
-        }catch(ClassCastException e){
-            return "collection handles only routes\n";
+    public String add(Route route){
+        Route oldRoute;
+        if(coll.contains(route)) {
+            oldRoute = getById(route.getId());
+            if (oldRoute.equals(route)) return "element is already in the collection";
         }
-        if(coll.add(route)) return "element was added\n";
-        return "element is already in collection\n";
+        try {
+            while(!coll.add(route)){
+                route = new Route(route.getId()+1, route.getName(), route.getCreationDate(),route.getFromLocation(),route.getToLocation(), route.getDistance());
+            }
+        } catch (IOException e) {
+            return "unexpected adding error\n";
+        }
+        return "element added\n";
     }
+
     public String info(){
         return "initialisation date: "+initDate+"\n"+"size: "+ coll.size()+"\n"+ "collection class: " + coll.getClass()+"\n";
     }
@@ -37,12 +43,6 @@ public class TreeSetHandler {
         return s.toString();
     }
     public String update(Long id, Route route){
-//        Route route;
-//        try{
-//            route = (Route) obj;
-//        }catch(ClassCastException e){
-//            return "collection handles only routes\n";
-//        }
         for (Route o : coll) {
             if(o.getId().equals(id)) {
                 coll.remove(o);
@@ -68,6 +68,15 @@ public class TreeSetHandler {
             }
         }
         return "element with this id doesn`t exist\n";
+    }
+
+    public Route getById(long id){
+        for (Route o : coll) {
+            if (o.getId() == id) {
+                return o;
+            }
+        }
+        return null;
     }
     public String clear(){
         coll.clear();
@@ -144,5 +153,8 @@ public class TreeSetHandler {
 
     public Route[] getAllRoutes(){
        return coll.toArray(new Route[0]);
+    }
+    public long size(){
+        return coll.size();
     }
 }
